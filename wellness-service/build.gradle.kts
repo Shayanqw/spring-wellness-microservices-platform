@@ -28,10 +28,6 @@ configurations {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-
-    // A2 Dependencies
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -39,7 +35,24 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // ✅ Missing deps required by your code (JPA + Redis + Lombok)
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+
+    // DB driver (you can keep Postgres even if you use Docker locally)
+    runtimeOnly("org.postgresql:postgresql")
+
+    // Tests (better to rely on spring-boot-starter-test)
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
+
+    // If you really use Testcontainers in this service, keep it (otherwise remove)
     testImplementation("org.testcontainers:kafka")
 }
 
