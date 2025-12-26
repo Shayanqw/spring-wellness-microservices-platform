@@ -1,0 +1,28 @@
+### Event Service demo (via API Gateway)
+###
+### 1) Get an access token (see scripts/test-api.sh), then paste it below:
+@token = YOUR_ACCESS_TOKEN_HERE
+
+### 1. POST create event (requires staff role)
+POST http://localhost:8082/api/events
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Mindfulness Workshop",
+  "description": "A guided mindfulness session for students.",
+  "date": "2025-11-15T10:00:00",
+  "location": "Toronto",
+  "capacity": 30,
+  "resourceIds": [1, 2]
+}
+
+### 2. GET event by ID (replace {id})
+GET http://localhost:8082/api/events/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 3. Search by location
+GET http://localhost:8082/api/events/search/location?loc=Toronto
+Authorization: Bearer {{token}}
+Accept: application/json

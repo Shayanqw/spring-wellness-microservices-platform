@@ -1,0 +1,31 @@
+### Wellness Service demo (via API Gateway)
+###
+### 1) Get an access token (see scripts/test-api.sh), then paste it below:
+@token = YOUR_ACCESS_TOKEN_HERE
+
+### 1. GET all resources
+GET http://localhost:8082/api/resources
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 2. Filter by category
+GET http://localhost:8082/api/resources/category/mental-health
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 3. Search by keyword
+GET http://localhost:8082/api/resources/search?keyword=Mindfulness
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### 4. POST create a new resource (requires staff role)
+POST http://localhost:8082/api/resources
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Mindfulness Basics",
+  "description": "Intro guide to meditation",
+  "category": "mental-health",
+  "url": "https://example.com/mindfulness"
+}

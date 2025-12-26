@@ -1,0 +1,25 @@
+# --- Build outputs ---
+.gradle/
+**/.gradle/
+build/
+**/build/
+out/
+**/out/
+target/
+**/target/
+bin/
+**/bin/
+
+# --- IDEs ---
+.idea/
+**/.idea/
+*.iml
+*.ipr
+*.iws
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Local env ---
+.env
