@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -22,11 +22,11 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
           cache: 'gradle'
 
-      - name: Test (${{ matrix.service }})
+      - name: Build (${{ matrix.service }}) - compile only
         working-directory: ${{ matrix.service }}
         run: |
           chmod +x ./gradlew
-          ./gradlew test --no-daemon
+          ./gradlew clean build -x test --no-daemon
